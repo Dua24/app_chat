@@ -7,5 +7,7 @@ include_once "app/Config.php";
 $auth = new AuthController();
 $auth->checkAuth();
 
+
+
 $mess = new MessageController();
 $mess->insertChat();

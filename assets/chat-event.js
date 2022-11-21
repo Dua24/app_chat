@@ -3,8 +3,17 @@ const inputField = form.querySelector('.input-field');
 const sendBtn = form.querySelector('button');
 const chatBox = document.querySelector('.chat-box');
 
+const verifyBtn = document.querySelector('.areaChecking button')
+// const verifyInput = document.querySelector('.areaChecking input')
+
 const incoming_id = form.querySelector('.incoming_id').value;
 
+
+verifyBtn.onclick = () => {
+	// verifyInput.classList.toggle("show");
+	verifyBtn.classList.toggle("active");
+	// verifyInput.focus();
+}
 
 form.onsubmit = (e) => {
 	e.preventDefault();
@@ -32,6 +41,9 @@ sendBtn.onclick = () => {
 	xhr.send(formData);
 }
 
+
+
+
 setInterval(() => {
 	let xhr = new XMLHttpRequest();
 	xhr.open("POST", 'api/get-chat.php', true);
@@ -45,7 +57,10 @@ setInterval(() => {
 	}
 	xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xhr.send('incoming_id='+incoming_id);
-}, 500)
+
+	
+	
+ }, 500)
 
 chatBox.onmouseenter = () => {
 	chatBox.classList.add('active')

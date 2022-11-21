@@ -33,7 +33,6 @@ include_once "part/header.php";
       </div>
     </section>
   </div>
-
   <script src="assets/users-event.js"></script>
 </body>
 

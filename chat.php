@@ -15,7 +15,7 @@ include_once "part/header.php";
 <body>
   <div class="wrapper">
     <section class="chat-area">
-      <header>
+      <header class="header-area">
         <a href="users.php" class="back-icon">
           <i class="fas fa-arrow-left"></i>
         </a>
@@ -24,6 +24,10 @@ include_once "part/header.php";
           <div><?php echo $row['status']; ?></div>
         </div>
       </header>
+      <div class="areaChecking">
+        <!-- <input type="text" class="verifyInput" placeholder="Nhập public key ..." autocomplete="off"> -->
+        <button type="button" class="verifyBtn">Verify</button>
+      </div>
       <div class="chat-box">
 
       </div>

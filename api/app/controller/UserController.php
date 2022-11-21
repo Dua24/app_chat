@@ -25,7 +25,6 @@ class UserController
         echo $output;
     }
 
-
     public function searchUser($searchTerm)
     {
         $sql = "SELECT * FROM users 

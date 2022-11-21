@@ -1,17 +1,17 @@
 <?php
-
-class MessageController extends RSA_Handler
+include "RSA.php";
+class MessageController
 {
     private Config $conn;
-    private RSA_Handler $RSA;
+    private $keys;
     public function __construct()
     {
         if (!isset($_SESSION)) {
             session_start();
         }
-
         $this->conn = new Config();
         $this->RSA = new RSA_Handler();
+        $this->keys = $this->RSA->generate_keypair(1024);
     }
 
     public function insertChat()
@@ -22,7 +22,7 @@ class MessageController extends RSA_Handler
         $message = mysqli_real_escape_string($this->conn->connect(), $_POST['message']);
         if (!empty($message)) {
             $sql = "INSERT INTO messages (incoming_msg_id, outgoing_msg_id, msg)
-                    VALUES ({$incoming_id}, {$outgoing_id}, '{$message}')";
+                    VALUES ({$incoming_id}, {$outgoing_id}, '{$this->RSA->encrypt($message,$this->keys[0])}')";
             mysqli_query($this->conn->connect(), $sql) or die();
         }
     }

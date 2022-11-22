@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Latest compiled and minified CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+    />
+
+    <!-- jQuery library -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <link rel="stylesheet" href="./themify-icons/themify-icons.css" />
+    <!-- Latest compiled JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css"
+      integrity="sha512-q3eWabyZPc1XTCmF+8/LuE1ozpg5xxn7iO89yfSOd5/oKvyqLngoNGsx8jq92Y8eXJ/IRxQbEC+FGSYxtk2oiw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <link rel="stylesheet" href="./style.css" />
+    <title>Document</title>
+    <style>
+      .mess {
+        border: 1px solid #ccc;
+        padding: 6px 10px;
+        margin: 12px 0px;
+        border-radius: 16px;
+      }
+
+      .mess.outcome {
+        background-color: #0099ff;
+        color: #fff;
+        align-self: end !important;
+      }
+
+      .mess.income {
+        background-color: #e4e6eb;
+        color: #000;
+        align-self: flex-start !important;
+      }
+      .mess.verifyMsg {
+        border-radius: 7px;
+        border: 1px solid #ff5722;
+        background-color: #e9d735;
+        cursor: pointer;
+      }
+      .mess.unverified {
+        border-radius: 7px;
+        border: 1px solid #ff5722;
+        background-color: #d28989;
+        cursor: pointer;
+      }
+
+      .mess.verified {
+        border-radius: 7px;
+        border: 1px solid #4caf50;
+        background-color: #a4dea6;
+        cursor: pointer;
+      }
+
+      .name-user {
+        font-weight: 600;
+        font-size: 19px;
+      }
+
+      .status {
+        font-weight: 400;
+        color: #146614;
+        font-size: 16px;
+      }
+
+      .btnsend:hover {
+        opacity: 1;
+      }
+      .modalRsa {
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.3);
+        display: none;
+        opacity: 0;
+        transition: all ease 1s;
+      }
+      .modalRsa.show {
+        animation: show ease 0.4s;
+      }
+      .modalRsa.active {
+        display: flex;
+        opacity: 1;
+      }
+      .inner-modal {
+        min-width: 800px;
+        background-color: #fff;
+        margin: auto;
+      }
+      .statusSending {
+        text-align: center;
+        font-size: 26px;
+        margin: 15px 0;
+        color: #607d8b;
+        position: relative;
+      }
+      .lbModal {
+        width: 100%;
+      }
+      .formModal {
+        padding: 4px 22px;
+        margin-bottom: 20px;
+      }
+      .formModal input {
+        width: 100%;
+        min-height: 47px;
+        padding: 0 4px;
+      }
+      .loader-1 {
+        position: absolute;
+        top: 0;
+        right: 30%;
+      }
+      .createsign {
+        opacity: 0.8;
+        background-color: #b6b8b6;
+        padding: 15px 30px;
+        border: none;
+        font-size: 17px;
+        float: right;
+        margin-right: 22px;
+      }
+      .createsign:hover {
+        opacity: 1;
+        background-color: green !important;
+        color: #fff !important;
+      }
+      .formModal label {
+        font-weight: 600;
+        font-size: 16px;
+      }
+      .inputmsg {
+        min-height: 20px;
+        pointer-events: none;
+        color: #04040491;
+        font-weight: 600;
+      }
+      .inputsign {
+        pointer-events: none;
+        color: #25546b;
+        font-size: 15px;
+      }
+      .signed{
+        min-height: 20px;
+        padding: 5px 5px;
+        border: 1px solid red;
+        font-size: 17px;
+      }
+      .connect{
+        animation: skeleton .7s linear infinite alternate;
+        height:8px;
+        width: 100%;
+        border-radius: 10px;
+        
+      }
+      .online{
+        width: 10px;
+        height: 10px;
+        display: inline-block;
+        background-color: green;
+        border-radius: 100%;
+        margin-right: 4px;
+      }
+
+      @keyframes skeleton {
+        0% {
+          background:rgb(152, 225, 200);
+        }
+        50%{
+          background:rgb(172, 172, 228);
+
+        }
+        100%{
+          background:rgb(226, 181, 181);
+        }
+      }
+      @keyframes show {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-5">
+          <div class="wrapper">
+            <section class="chat-area">
+              <header class="name-user">
+                <div class="details">Bear Trần</div>
+                <div class="status">
+                  <span class="online"></span>
+                  Đang hoạt động</div>
+              </header>
+              <div
+                style="
+                  display: flex;
+                  flex-direction: column;
+                  align-items: flex-start;
+                "
+                class="chat-box"
+              ></div>
+              <form class="typing-area">
+                <input
+                  type="text"
+                  name="message"
+                  class="input-field"
+                  placeholder="Nhập nội dung ở đây..."
+                  autocomplete="off"
+                />
+                <button class="btnsend">
+                  <i class="fab fa-telegram-plane"></i>
+                </button>
+              </form>
+            </section>
+          </div>
+        </div>
+        <div style="display: flex;align-items: center; justify-content: center" class="col-2">
+          <div class="connect"></div>
+        </div>
+        <div class="col-5">
+          <div class="wrapper">
+            <section class="chat-area">
+              <header class="name-user">
+                <div class="details">Cat Phan</div>
+                <div class="status"><span class="online"></span> Đang hoạt động</div>
+              </header>
+
+              <div
+                style="
+                  display: flex;
+                  flex-direction: column;
+                  align-items: flex-end;
+                  justify-content: flex-end;
+                "
+                class="chat-box"
+              ></div>
+              <form action="#" class="typing-area">
+                <input
+                  type="text"
+                  name="message"
+                  class="input-field"
+                  placeholder="Nhập nội dung ở đây..."
+                  autocomplete="off"
+                />
+                <button class="btnsend">
+                  <i class="fab fa-telegram-plane"></i>
+                </button>
+              </form>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <div class="modalRsa send">
+    <div style="padding: 0 0 32px 0" class="inner-modal">
+      <h2 class="statusSending">Mã hóa tin nhắn</h2>
+      <form class="formModal" action="">
+        <label class="lbModal" for="">Private Key</label>
+        <!-- <input class="key" type="text" placeholder="Enter private key ... " /> -->
+        <textarea class="key priv" rows="10" cols="80">
+-----BEGIN RSA PRIVATE KEY-----
+MIICWwIBAAKBgQDRhGF7X4A0ZVlEg594WmODVVUIiiPQs04aLmvfg8SborHss5gQ
+Xu0aIdUT6nb5rTh5hD2yfpF2WIW6M8z0WxRhwicgXwi80H1aLPf6lEPPLvN29EhQ
+NjBpkFkAJUbS8uuhJEeKw0cE49g80eBBF4BCqSL6PFQbP9/rByxdxEoAIQIDAQAB
+AoGAA9/q3Zk6ib2GFRpKDLO/O2KMnAfR+b4XJ6zMGeoZ7Lbpi3MW0Nawk9ckVaX0
+ZVGqxbSIX5Cvp/yjHHpww+QbUFrw/gCjLiiYjM9E8C3uAF5AKJ0r4GBPl4u8K4bp
+bXeSxSB60/wPQFiQAJVcA5xhZVzqNuF3EjuKdHsw+dk+dPECQQDubX/lVGFgD/xY
+uchz56Yc7VHX+58BUkNSewSzwJRbcueqknXRWwj97SXqpnYfKqZq78dnEF10SWsr
+/NMKi+7XAkEA4PVqDv/OZAbWr4syXZNv/Mpl4r5suzYMMUD9U8B2JIRnrhmGZPzL
+x23N9J4hEJ+Xh8tSKVc80jOkrvGlSv+BxwJAaTOtjA3YTV+gU7Hdza53sCnSw/8F
+YLrgc6NOJtYhX9xqdevbyn1lkU0zPr8mPYg/F84m6MXixm2iuSz8HZoyzwJARi2p
+aYZ5/5B2lwroqnKdZBJMGKFpUDn7Mb5hiSgocxnvMkv6NjT66Xsi3iYakJII9q8C
+Ma1qZvT/cigmdbAh7wJAQNXyoizuGEltiSaBXx4H29EdXNYWDJ9SS5f070BRbAIl
+dqRh3rcNvpY6BKJqFapda1DjdcncZECMizT/GMrc1w==
+-----END RSA PRIVATE KEY-----
+</textarea
+        >
+      </form>
+      <form class="formModal" action="">
+        <label class="lbModal" for="">Tin nhắn cần gửi</label>
+        <input class="inputmsg" type="text" />
+      </form>
+      <form class="formModal" action="">
+        <label class="lbModal" for="">Tạo chữ ký điện tử (SHA256) </label>
+        <input class="inputsign" type="text" />
+      </form>
+      <input class="signed" style="min-height: 20px" type="hidden" />
+      <button class="createsign">Tạo chữ ký và gửi</button>
+    </div>
+  </div>
+  <div class="modalRsa vrf">
+    <div style="padding: 0 0 32px 0" class="inner-modal">
+      <h2 class="statusSending">Xác thực tin nhắn</h2>
+      <form class="formModal" action="">
+        <label class="lbModal" for="">Public Key của bạn chat</label>
+        <textarea class="key" rows="10" cols="80">
+-----BEGIN CERTIFICATE-----
+MIIBvTCCASYCCQD55fNzc0WF7TANBgkqhkiG9w0BAQUFADAjMQswCQYDVQQGEwJK
+UDEUMBIGA1UEChMLMDAtVEVTVC1SU0EwHhcNMTAwNTI4MDIwODUxWhcNMjAwNTI1
+MDIwODUxWjAjMQswCQYDVQQGEwJKUDEUMBIGA1UEChMLMDAtVEVTVC1SU0EwgZ8w
+DQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBANGEYXtfgDRlWUSDn3haY4NVVQiKI9Cz
+Thoua9+DxJuiseyzmBBe7Roh1RPqdvmtOHmEPbJ+kXZYhbozzPRbFGHCJyBfCLzQ
+fVos9/qUQ88u83b0SFA2MGmQWQAlRtLy66EkR4rDRwTj2DzR4EEXgEKpIvo8VBs/
+3+sHLF3ESgAhAgMBAAEwDQYJKoZIhvcNAQEFBQADgYEAEZ6mXFFq3AzfaqWHmCy1
+ARjlauYAa8ZmUFnLm0emg9dkVBJ63aEqARhtok6bDQDzSJxiLpCEF6G4b/Nv/M/M
+LyhP+OoOTmETMegAVQMq71choVJyOFE5BtQa6M/lCHEOya5QUfoRF2HF9EjRF44K
+3OK+u3ivTSj3zwjtpudY5Xo=
+-----END CERTIFICATE-----
+</textarea
+        >
+      </form>
+      <form class="formModal" action="">
+        <label class="lbModal" for="">Tin nhắn nhận từ bạn chat</label>
+        <input
+          class="inputmsg"
+          style="min-height: 20px; pointer-events: none"
+          type="text"
+        />
+      </form>
+      <form class="formModal" action="">
+        <label class="lbModal" for=""
+          >Tin nhắn được mã hóa nhận từ bạn chat</label
+        >
+        <input class="signed" style="min-height: 20px" type="text" />
+      </form>
+        <input class="inputsign" type="hidden" />
+      </form>
+      <button class="createsign">Xác thực</button>
+    </div>
+  </div>
+</html>
+
+<script type="module" src="./chat-event.js"></script>
